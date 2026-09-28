@@ -1,6 +1,7 @@
 import joblib
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import pandas as pd
 
@@ -36,7 +37,7 @@ model = joblib.load("models/final_xgb_model.pkl")
 
 @app.get("/")
 def home():
-    return {"message": "ScreenWise API is running"}
+    return FileResponse("frontend/index.html")
 
 @app.post("/predict")
 def predict(data: UserInput):
