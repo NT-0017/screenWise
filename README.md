@@ -8,6 +8,12 @@ The application uses a trained **XGBoost classification model** with a FastAPI b
 
 ---
 
+# ScreenWise
+
+### 🚀 Live Demo
+
+[**Visit ScreenWise →**](https://screenwise-cn11.onrender.com)
+
 ## 🎯 Project Objective
 
 The objective of ScreenWise is to use machine learning to analyze smartphone usage behavior and estimate whether a user is likely to be classified as **Addicted** or **Not Addicted**.
@@ -19,6 +25,70 @@ The application also provides a **risk probability** and categorizes the result 
 - 🔴 High Risk
 
 ---
+## 🏗️ Project Architecture
+
+ScreenWise follows an end-to-end machine learning architecture that connects the trained ML model with a FastAPI backend and a web-based frontend.
+
+```text
+                    ┌──────────────────────────┐
+                    │        User              │
+                    │  Enters Personal &       │
+                    │  Smartphone Usage Data   │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │       Frontend           │
+                    │    HTML / CSS / JS       │
+                    │                          │
+                    │  • Input Form            │
+                    │  • Validation            │
+                    │  • Prediction Result     │
+                    │  • Risk Visualization    │
+                    └────────────┬─────────────┘
+                                 │
+                          POST /predict
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │      FastAPI Backend     │
+                    │                          │
+                    │      backend/main.py     │
+                    │                          │
+                    │  • Receives user input   │
+                    │  • Creates DataFrame     │
+                    │  • Applies preprocessing │
+                    │  • Generates prediction  │
+                    └────────────┬─────────────┘
+                                 │
+                    ┌────────────┴────────────┐
+                    │                         │
+                    ▼                         ▼
+          ┌───────────────────┐     ┌───────────────────┐
+          │   Preprocessor    │     │  XGBoost Model    │
+          │                   │     │                   │
+          │ preprocessor.pkl  │     │ final_xgb_model   │
+          │                   │     │      .pkl         │
+          └─────────┬─────────┘     └─────────┬─────────┘
+                    │                         │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │      Prediction          │
+                    │                          │
+                    │ • Addicted / Not Addicted│
+                    │ • Risk Probability      │
+                    │ • Risk Level             │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────────────┐
+                    │      Web Interface       │
+                    │                          │
+                    │   Displays the result    │
+                    │   and risk probability   │
+                    └──────────────────────────┘
 
 ## ✨ Features
 
@@ -67,7 +137,10 @@ The trained model and preprocessing pipeline are stored in the `models` director
 
 ---
 
+
 ## 🏗️ System Architecture
+
+ScreenWise follows an end-to-end machine learning architecture connecting the web interface, FastAPI backend, preprocessing pipeline, and trained XGBoost model.
 
 ```text
 User
@@ -82,19 +155,20 @@ FastAPI Backend
   │
   ▼
 Preprocessing Pipeline
+(preprocessor.pkl)
   │
   ▼
 XGBoost Model
+(final_xgb_model.pkl)
   │
   ▼
-Prediction + Probability
+Prediction + Risk Probability
   │
   ▼
 Risk Classification
   │
   ▼
 Frontend Result
-```
 
 ---
 
