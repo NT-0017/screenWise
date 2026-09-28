@@ -2,10 +2,12 @@ import joblib
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import pandas as pd
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
